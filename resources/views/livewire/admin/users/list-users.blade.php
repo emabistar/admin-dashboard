@@ -13,6 +13,12 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
        <div class="content">
+      <!--  @if(session()->has('message'))
+        <div class="alert alert-success  ml-5 mr-5 " role="alert">
+        <h4 class="alert-heading"><i class="fa fa-check-circle mr-1"></i>{{session('message')}}</h4>
+      
+      </div>
+       @endif -->
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
@@ -31,16 +37,13 @@
             </tr>
   </thead>
   <tbody>
+            
+              @foreach($users as $user)
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
+
+              <th scope="row">{{$loop->iteration}}</th>
+              <td>{{$user->name}}</td>
+              <td>{{$user->email}}</td>
               <td>
                   <a href="#">
                       <i  class="fa fa-edit text mr-2"></i>
@@ -50,6 +53,7 @@
                      </a>
               </td>
             </tr>
+            @endforeach
            
   </tbody>
 </table>
@@ -66,8 +70,9 @@
 
 
 <!-- Modal -->
-        <div class="modal fade" id="userForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="userForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
           <div class="modal-dialog" role="document">
+            <form autocomplete="off" wire:submit.prevent="createUser">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Tilføj new bruger</h5>
@@ -75,36 +80,67 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-                
-
-            <form>
+              <div class="modal-body">           
                 <div class="form-group">
                     <label for="name">Navn</label>
-                    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Indtast navn">
+                    <input type="text" wire:model.defer="state.name" 
+                    class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="textHelp" placeholder="Indtast navn">
+                    @error('name')
+                      <div class="invalid-feedback">
+                        {{$message}}
+
+                    </div>
+
+                    @enderror
                     
                   </div>
                   <div class="form-group">
                     <label for="email">Email adresse</label>
-                    <input type="email" class="form-control" id="email1" aria-describedby="emailHelp" placeholder="Indtast email">
+                    <input type="text" wire:model.defer="state.email" class="form-control
+                    @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" placeholder="Indtast email">
+
+                    @error('email')
+
+                    <div class="invalid-feedback">
+                        {{$message}}
+
+                    </div>
+                    @enderror
                     
                   </div>
                   <div class="form-group">
                     <label for="password">Adgangskode</label>
-                    <input type="password" class="form-control" id="passwod" placeholder="Adgangskode">
+                <input type="password" wire:model.defer="state.password" class="form-control @error('password') is-invalid @enderror "id="password" placeholder="Indtast adgangskode">
+                    
+                     @error('password')
+
+                    <div class="invalid-feedback">
+                        {{$message}}
+
+                    </div>
+                    @enderror
                   </div>
+
                   <div class="form-group">
                     <label for="passwordConfirmation">Bekraft adgangskode</label>
-                    <input type="passwordConfirmation" class="form-control" id="passwordConfirmation" placeholder="Bekraft Adgangskode">
+                    <input type="password"  wire:model.defer="state.password_confirmation"class="form-control  @error('password_confirmation') is-invalid @enderror " id="passwordConfirmation" placeholder="Bekraft Adgangskode">
+                     @error('password_confirmation')
+
+                    <div class="invalid-feedback">
+                        {{$message}}
+
+                    </div>
+                    @enderror
                   </div>
                  
-            </form>
+            
 
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuller</button>
-                <button type="button" class="btn btn-primary">Gem</button>
+                <button type="submit" class="btn btn-primary">Gem</button>
               </div>
+              </form>
             </div>
           </div>
         </div>

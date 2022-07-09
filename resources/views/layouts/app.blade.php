@@ -16,6 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{asset('frontend/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('frontend/dist/css/adminlte.min.css')}}">
+  <link href=" {{asset('frontend/plugins/toastr/toastr.min.css')}}" rel="stylesheet"/>
    @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini">
@@ -59,10 +60,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{asset('frontend/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('frontend/dist/js/adminlte.min.js')}}"></script>
+<script src="{{asset('frontend/plugins/toastr/toastr.min.js')}}"></script>
+<script>
+	
+$(document).ready(function(){
+ toastr.options  = {
+ 	"positionClass": "toast-top-center mt-5",
+ 	"progressbar": true,
+ }
+ window.addEventListener('hide-form', event=>{
+     $('#userForm').modal('hide')
+     toastr.success(event.detail.message,'Success')
+	});
+});
+
+</script>
 <script>
 	window.addEventListener('show-form',event=>{
 		$('#userForm').modal('show')
-	})
+	});
+	
 </script>
 @livewireScripts
 </body>
