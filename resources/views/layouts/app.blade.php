@@ -17,6 +17,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('frontend/dist/css/adminlte.min.css')}}">
   <link href=" {{asset('frontend/plugins/toastr/toastr.min.css')}}" rel="stylesheet"/>
+   <link href=" {{asset('frontend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet"/>
+
+
    @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini">
@@ -61,7 +64,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="{{asset('frontend/dist/js/adminlte.min.js')}}"></script>
 <script src="{{asset('frontend/plugins/toastr/toastr.min.js')}}"></script>
+
+<script type="text/javascript" src="https://unpkg.com/moment"></script>
+<script type="text/javascript" src="{{ asset('frontend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
 <script>
+
 	
 $(document).ready(function(){
  toastr.options  = {
@@ -73,14 +81,29 @@ $(document).ready(function(){
      toastr.success(event.detail.message,'Success')
 	});
 });
+window.addEventListener('alert', event=>{
+     toastr.success(event.detail.message,'Success')
+
+});
 
 </script>
 <script>
-	window.addEventListener('show-form',event=>{
-		$('#userForm').modal('show')
+	window.addEventListener('showDeleteModal',event=>{
+      $('#deleteConfirmModal').modal('show');
+	});
+</script>
+
+<script>
+	window.addEventListener('hide-confirmModal',event=>{
+		$('#deleteConfirmModal').modal('hide')
+		toastr.success(event.detail.message,'Success')
 	});
 	
 </script>
+
+
+@stack('js')
+
 @livewireScripts
 </body>
 </html>
