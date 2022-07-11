@@ -41,12 +41,43 @@
                                     </div>
 
                               
-                                  
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">   
+                                                <label for="appointmentStartTime">Appointment Start Time</label>
+                                                 <div class="input-group mb-3">
+                                                     <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                         <i class="fas fa-clock"></i></span>
+                                                     </div>
+                                                     <!-- insert the customer time picker here   -->
+                                                    <x-timepicker wire:model.defer="state.appointment_start_time" id="appointmentStartTime"/>
+                                                 </div>
+                                    
+                                                       
+                                             </div>
+                                         </div>
+                                          <div class="col-sm-6">
+                                                <div class="form-group">
+                                                 <label for="appointmentStartTime">Appointment End Time</label>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-clock"></i></span>
+                                                        </div>
+                                                         <!-- insert the customer Date time picker here   -->
+                                                         <x-timepicker wire:model.defer="state.appointment_end_time" id="appointmentEndTime"/>
+                                                    </div>
+                                    
+                                                       
+                                                </div>
+                                        </div>
+                                    </div>
                                </div>
                                    
                                       
                             </div>
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Datoen:</label>
@@ -71,7 +102,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> 
+                                </div> -->
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div wire:ignore  class="form-group">

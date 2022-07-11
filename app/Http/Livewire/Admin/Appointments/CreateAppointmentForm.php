@@ -26,7 +26,7 @@ class CreateAppointmentForm extends Component
     public function createAppointment(){
         
         // validate
-        dd($this->state);
+        //dd($this->state);
         /* $validatorData = Validator::make($this->state,[
             'date'=>'required',
             'time' =>'required',
