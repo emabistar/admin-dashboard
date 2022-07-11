@@ -68,38 +68,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript" src="https://unpkg.com/moment"></script>
 <script type="text/javascript" src="{{ asset('frontend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-<script>
 
-	
-$(document).ready(function(){
- toastr.options  = {
- 	"positionClass": "toast-top-center mt-5",
- 	"progressbar": true,
- }
- window.addEventListener('hide-form', event=>{
-     $('#userForm').modal('hide')
-     toastr.success(event.detail.message,'Success')
-	});
-});
-window.addEventListener('alert', event=>{
-     toastr.success(event.detail.message,'Success')
-
-});
-
-</script>
-<script>
-	window.addEventListener('showDeleteModal',event=>{
-      $('#deleteConfirmModal').modal('show');
-	});
-</script>
-
-<script>
-	window.addEventListener('hide-confirmModal',event=>{
-		$('#deleteConfirmModal').modal('hide')
-		toastr.success(event.detail.message,'Success')
-	});
-	
-</script>
 
 
 @stack('js')

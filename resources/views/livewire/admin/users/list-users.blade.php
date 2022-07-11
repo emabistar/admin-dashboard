@@ -165,10 +165,10 @@
 
 
 
-        </div>
+  </div>
          <!---Delete Confirm Modal-->
          
-           <div class="modal fade" id="deleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+     <div class="modal fade" id="deleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">Bekræfte slette
@@ -183,6 +183,45 @@
                      </div>
                 </div>
           </div>
-          
+     
+@push('js')
 
+ <script>
+    window.addEventListener('show-form',event=>{
+        $('#userForm').modal('show')
+    });
+    
+</script>
+ <script>
+
+$(document).ready(function(){
+ toastr.options  = {
+  "positionClass": "toast-top-center mt-5",
+  "progressbar": true,
+ }
+ window.addEventListener('hide-form', event=>{
+     $('#userForm').modal('hide')
+     toastr.success(event.detail.message,'Success')
+  });
+});
+window.addEventListener('alert', event=>{
+     toastr.success(event.detail.message,'Success')
+
+});
+
+</script>
+<script>
+  window.addEventListener('showDeleteModal',event=>{
+      $('#deleteConfirmModal').modal('show');
+  });
+</script>
+
+<script>
+  window.addEventListener('hide-confirmModal',event=>{
+    $('#deleteConfirmModal').modal('hide')
+    toastr.success(event.detail.message,'Success')
+  });
+  
+</script>     
+@endpush
 </div>
